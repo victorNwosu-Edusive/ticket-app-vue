@@ -131,7 +131,7 @@ import { ref, onMounted } from 'vue';
 import Navbar from '../../components/Navbar.vue';
 import Toast from '../../components/Toast.vue';
 import { getAllTickets, createTicket, updateTicket, deleteTicket } from '../../services/ticketService';
-
+import { Edit } from 'lucide-vue-next'
 const STATUS_OPTIONS = ["open", "in_progress", "closed"];
 
 const statusColor = {
