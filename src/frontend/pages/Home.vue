@@ -63,8 +63,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import logo from '../../assets/images/ticketa.png'
+
+onMounted(() => {
+  document.title = 'Ticketa - Manage Tickets with Ease'
+})
 
 // Reactive state
 const features = ref([

@@ -134,7 +134,7 @@ const load = async () => {
 }
 
 onMounted(() => {
-  // Fetch logged-in user
+  document.title = 'Dashboard - Ticketa'
   const session = JSON.parse(localStorage.getItem('ticketapp_session'))
   if (session && session.user) {
     user.value = session.user

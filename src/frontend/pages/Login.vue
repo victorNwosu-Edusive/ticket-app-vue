@@ -53,11 +53,15 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Toast from '../../components/Toast.vue'
 
 const router = useRouter()
+
+onMounted(() => {
+  document.title = 'Login - Ticketa'
+})
 const email = ref('')
 const password = ref('')
 const errors = reactive({})

@@ -64,11 +64,15 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Toast from '../../components/Toast.vue'
 
 const router = useRouter()
+
+onMounted(() => {
+  document.title = 'Sign Up - Ticketa'
+})
 const form = reactive({
   name: '',
   email: '',

@@ -71,6 +71,23 @@ export async function getAllTickets() {
   }
 }
 
+export async function getTicketById(id) {
+  await wait(150)
+  try {
+    const all = _readAll()
+    const ticket = all.find((t) => t.id === id)
+    if (!ticket) {
+      throw new Error('Ticket not found')
+    }
+    return ticket
+  } catch (err) {
+    if (err && err.message === 'Ticket not found') {
+      return Promise.reject(err)
+    }
+    return Promise.reject(new Error('Failed to load ticket. Please retry.'))
+  }
+}
+
 /**
  * Create a new ticket
  * @param {Object} ticket Ticket object without id

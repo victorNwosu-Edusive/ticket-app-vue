@@ -6,9 +6,19 @@ import Login from './frontend/pages/Login.vue'
 import Signup from './frontend/pages/Signup.vue'
 import Dashboard from './frontend/pages/Dashboard.vue'
 import Tickets from './frontend/pages/Tickets.vue'
+import CreateTicket from './frontend/pages/CreateTicket.vue'
+import EditTicket from './frontend/pages/EditTicket.vue'
 import './index.css'
 
-// Create router instance
+const requireSession = (to, from, next) => {
+  const session = localStorage.getItem('ticketapp_session')
+  if (!session) {
+    next('/auth/login')
+  } else {
+    next()
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -31,36 +41,31 @@ const router = createRouter({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      beforeEnter: (to, from, next) => {
-        const session = localStorage.getItem('ticketapp_session')
-        if (!session) {
-          next('/auth/login')
-        } else {
-          next()
-        }
-      }
+      beforeEnter: requireSession
     },
     {
       path: '/tickets',
       name: 'Tickets',
       component: Tickets,
-      beforeEnter: (to, from, next) => {
-        const session = localStorage.getItem('ticketapp_session')
-        if (!session) {
-          next('/auth/login')
-        } else {
-          next()
-        }
-      }
+      beforeEnter: requireSession
+    },
+    {
+      path: '/tickets/create',
+      name: 'CreateTicket',
+      component: CreateTicket,
+      beforeEnter: requireSession
+    },
+    {
+      path: '/tickets/:id/edit',
+      name: 'EditTicket',
+      component: EditTicket,
+      beforeEnter: requireSession
     }
   ]
 })
 
-// Create Vue app
 const app = createApp(App)
 
-// Use router
 app.use(router)
 
-// Mount app
 app.mount('#root')
